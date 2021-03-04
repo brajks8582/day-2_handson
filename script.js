@@ -1,22 +1,21 @@
 var data = [];
 
-function append_to_div(div_name, data) {
-    document.getElementById(div_name).innerText += data;
-}
-
 function addFeedback() {
     //Fill the required logic
 
     var x = document.getElementById("feedback").value;
-    data.push(x);
-    append_to_div("result", "\n" + "Successfully Added Feedback Details!" + "\n");
-    // document.getElementById("result").innerHTML = "<h2>Form Details</h2><br>Successfully Added Feedback Details";
+    if (x) {
+        data.push(x);
+        document.getElementById("result").innerHTML = "<h2>Form Details</h2><br>Successfully Added Feedback Details!";
+        document.getElementById("feedback").value = '';
+    }
 }
 
 function viewFeedback() {
     //Fill the required logic
     var text = "",
         dlen = data.length;
+
     var i = 0,
         j = i + 1;
 
@@ -26,9 +25,13 @@ function viewFeedback() {
         j++;
     }
 
-
-    document.getElementById("result").innerHTML = "<h2>Form Details</h2><br>" + text;
+    if (dlen == 0) {
+        document.getElementById("result").innerHTML = "";
+        return;
+    }
     while (data.length > 0) {
         data.pop();
     }
+
+    document.getElementById("result").innerHTML = "<h2>Form Details</h2><br>" + text;
 }
